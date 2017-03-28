@@ -11,6 +11,10 @@ class Store {
     addMovie(value) {
         this.watchlist.push(value);
     }
+
+    fetchMovies() {
+        async.se
+    }
 }
 
 var store = window.store = new Store;
