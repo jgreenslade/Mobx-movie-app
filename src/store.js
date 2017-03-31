@@ -1,19 +1,25 @@
 import {computed, autorun, observable} from "mobx";
 
+import {searchMovies} from "./async";
+
 class Store {
-    @observable watchlist = ["Logan", "The Evil Dead", "Get Out"];
+    @observable watchlist = [];
     @observable filter = "";
     @computed get filteredMovies() {
         const matchesFilter = new RegExp(this.filter, "i");
-        return this.watchlist.filter(movie => !this.filter || matchesFilter.test(movie));
-    }
+        return this.watchlist.filter(movie => !this.filter || matchesFilter.test(movie.title) || matchesFilter.test(movie.overview));
+    };
+    @observable searchResults = [];
 
     addMovie(value) {
         this.watchlist.push(value);
     }
 
-    fetchMovies() {
-        async.se
+    search(title) {
+       searchMovies(title).then((results) => {
+           console.log(results); 
+           this.searchResults = results.results;
+       });
     }
 }
 
