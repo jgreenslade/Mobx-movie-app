@@ -23,6 +23,20 @@ class Store {
     }
 }
 
+/* Changes to structure.
+    Goals:
+        avoid reloading already fetched details (enabling caching should help too)
+        use ids for stuff so you don't have to do complex operations to add or remove
+
+    Changes:
+        store {
+            watchlist: [1, 11, 23, ...],
+            filter: "",                          // fine as is
+            searchResults: [{...}, {...}, ...],  // fine as is
+            cachedMovies: [{...},  {...}, ...],  // Any movie that's been added to the watchlist should be cached so that add remove ops are easy
+        }
+*/
+
 var store = window.store = new Store;
 
 export default store;

@@ -4,7 +4,8 @@
   "private": true,
   "proxy": "https://api.themoviedb.org/3/",
   "devDependencies": {
-    "custom-react-scripts": "0.0.23"
+    "custom-react-scripts": "0.0.23",
+    "node-sass": "^4.5.2"
   },
   "dependencies": {
     "bulma": "^0.4.0",
@@ -14,6 +15,8 @@
     "react-dom": "^15.4.2"
   },
   "scripts": {
+    "build-css": "node-sass src/ -o src/",
+    "watch-css": "npm run build-css && node-sass src/ -o src/ --watch --recursive",
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",

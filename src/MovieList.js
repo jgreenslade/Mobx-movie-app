@@ -3,7 +3,7 @@ import React, {Component} from 'react';
 
 import Movie from "./Movie";
 import MovieResult from "./MovieResult";
-import 'bulma/css/bulma.css';
+// import 'bulma/css/bulma.css';
 
 @observer
 class MovieList extends Component {
@@ -27,29 +27,60 @@ class MovieList extends Component {
 
   render() {
     const {filter, watchlist, filteredMovies, searchResults} = this.props.store;
-    const items = filteredMovies.map((item) => {
-        return <li><Movie
+    const items = filteredMovies.map((item, key) => {
+        return <Movie
             data={item}
-          /></li>;
+            key={key}
+          />;
       });
-    const results = searchResults.map((item) => {
-      return <li><MovieResult
+    const results = searchResults.map((item, key) => {
+      return <MovieResult
             data={item}
             store={this.props.store}
-          /></li>;
+            key={key}
+          />;
     });
 
     return (
-      <div>
-        <h1>Watchlist</h1>
-        <input className="input" onKeyPress={this.addMovieToStore.bind(this)} placeholder="add movie..."/>
-        <input className="input" value={filter} onChange={this.filter.bind(this)} placeholder="filter..."/>
-        <input className="input" onKeyPress={this.search.bind(this)} placeholder="search movies..."/>
-        <ul>{items}</ul>
+      <div className="content">
+        <h1>Watchlist App</h1>
+        
+        {/* Manage your watchlist */}
+        <div className="columns">
+          <div className="column">
+            <input className="input" onKeyPress={this.addMovieToStore.bind(this)} placeholder="add movie..."/>
+            <input className="input" value={filter} onChange={this.filter.bind(this)} placeholder="filter..."/>
+          </div>
+          <div className="column">
+             <input className="input" onKeyPress={this.search.bind(this)} placeholder="search movies..."/>
+          </div>
+        </div>
 
-        <div>
-          <h1>Results</h1>
-          <ul>{results}</ul>
+        {/* Search for and add movies*/}
+        <div className="columns">
+          <div className="column">
+            <h1>Watchlist</h1>
+            <table>
+              <thead>
+                <tr>
+                  <td>Title</td>
+                  <td>Description</td>
+                  <td></td>
+                </tr>
+              </thead>
+              <tbody>{items}</tbody>
+            </table>
+          </div>
+          <div className="column">
+            <h1>Results</h1>
+            <table>
+              <tr>
+                  <td>Title</td>
+                  <td></td>
+                </tr>
+              <tbody>{results}</tbody>
+            </table>
+          </div>  
         </div>
       </div>
     )
