@@ -26,13 +26,14 @@ class MovieList extends Component {
   }
 
   render() {
-    const {filter, watchlist, filteredMovies, searchResults} = this.props.store;
+    const {filter, watchlist, filteredMovies, searchResults, getMovieById} = this.props.store;
     const items = filteredMovies.map((item, key) => {
-        return <Movie
-            data={item}
-            key={key}
-          />;
-      });
+      return <Movie
+          id={item}
+          store={this.props.store}
+          key={key}
+        />;
+    });
     const results = searchResults.map((item, key) => {
       return <MovieResult
             data={item}

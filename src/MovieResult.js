@@ -8,6 +8,7 @@ class MovieResult extends Component {
 
   render() {
     const {store, data} = this.props;
+    // const data = store.getMovieById(id);
 
     return (
       <tr>
