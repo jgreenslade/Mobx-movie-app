@@ -1,8 +1,15 @@
 import React, {Component} from 'react';
 
 class Movie extends Component {
+
+  removeMovieWrapper() {
+    this.props.store.removeMovie(this.props.id);
+  }
+
   render() {
-    const {data} = this.props;
+    const {id, store} = this.props;
+    const data = store.getMovieById(id)[0];
+
     return (
       <tr>
         <td>
@@ -12,7 +19,7 @@ class Movie extends Component {
           {data.overview}
         </td>
         <td>
-          <a className="button is-danger is-outlined"> &times; remove</a>
+          <a className="button is-danger is-outlined" onClick={this.removeMovieWrapper.bind(this)}> &times; remove</a>
         </td>
       </tr>
     )
